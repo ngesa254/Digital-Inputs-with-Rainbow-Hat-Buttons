@@ -35,6 +35,18 @@ public class MainActivity extends Activity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        try {
+            mButtonGpio.setEdgeTriggerType(Gpio.EDGE_BOTH);
+            mButtonGpio.registerGpioCallback(mButtonCallback);
+        }catch (Exception e){
+            throw new IllegalStateException(mButtonGpio +"Button cannot be monitored.",e);
+        }
+
+    }
+
     private final GpioCallback mButtonCallback = new GpioCallback() {
         @Override
         public boolean onGpioEdge(Gpio gpio) {
