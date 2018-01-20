@@ -25,4 +25,14 @@ public class MainActivity extends Activity {
         }
 
     }
+
+    @Override
+    protected void onDestroy() {
+        try {
+            mButtonGpio.close();
+        }catch (Exception e){
+            throw new IllegalStateException(mButtonGpio+"Button did not close", e);
+        }
+        super.onDestroy();
+    }
 }
