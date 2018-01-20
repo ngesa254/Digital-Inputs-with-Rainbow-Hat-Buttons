@@ -24,6 +24,13 @@ public class MainActivity extends Activity {
             throw new IllegalStateException (mButtonGpio+ "button cannot not be opened",e);
         }
 
+        try {
+            mButtonGpio.setDirection(Gpio.DIRECTION_IN);
+            mButtonGpio.setActiveType(Gpio.ACTIVE_LOW);
+        }catch (Exception e){
+            throw new IllegalStateException(mButtonGpio+ "button configuration failed",e );
+        }
+
     }
 
     @Override
