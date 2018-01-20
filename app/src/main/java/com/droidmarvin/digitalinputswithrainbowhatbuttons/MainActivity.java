@@ -66,6 +66,12 @@ public class MainActivity extends Activity {
     };
 
     @Override
+    protected void onStop() {
+        mButtonGpio.unregisterGpioCallback(mButtonCallback);
+        super.onStop();
+    }
+
+    @Override
     protected void onDestroy() {
         try {
             mButtonGpio.close();
