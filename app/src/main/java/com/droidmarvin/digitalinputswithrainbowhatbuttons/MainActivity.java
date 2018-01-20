@@ -2,8 +2,10 @@ package com.droidmarvin.digitalinputswithrainbowhatbuttons;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.things.pio.Gpio;
+import com.google.android.things.pio.GpioCallback;
 import com.google.android.things.pio.PeripheralManagerService;
 
 public class MainActivity extends Activity {
@@ -32,6 +34,24 @@ public class MainActivity extends Activity {
         }
 
     }
+
+    private final GpioCallback mButtonCallback = new GpioCallback() {
+        @Override
+        public boolean onGpioEdge(Gpio gpio) {
+
+            try {
+                if (mButtonGpio.getValue()){
+                    Log.i("TUT", "ON PRESSED DOWN");
+                }else {
+                    Log.i("TUT", "ON PRESSED UP");
+                }
+            }catch (Exception e){
+                throw new IllegalStateException(mButtonGpio+ "button cannot be read");
+            }
+
+            return true;
+        }
+    };
 
     @Override
     protected void onDestroy() {
