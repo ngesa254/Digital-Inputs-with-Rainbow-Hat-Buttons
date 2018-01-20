@@ -18,6 +18,11 @@ public class MainActivity extends Activity {
 
         PeripheralManagerService service = new PeripheralManagerService();
 
+        try {
+            mButtonGpio = service.openGpio(BUTTON_PIN);
+        }catch (Exception e){
+            throw new IllegalStateException (mButtonGpio+ "button cannot not be opened",e);
+        }
 
     }
 }
